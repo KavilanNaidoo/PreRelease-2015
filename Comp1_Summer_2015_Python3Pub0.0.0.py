@@ -2,6 +2,7 @@
  
 BOARDDIMENSION = 8
 def display_menu():
+  print()
   print('Main Menu')
   print()
   print('1. Start new game')
@@ -14,6 +15,7 @@ def display_menu():
   print('Please select an option: ', end='')
 
 def get_menu_selection():
+  display_menu()
   Choice = input()   
   return Choice
 
@@ -27,7 +29,31 @@ def make_selection(Choice):
   
     
 
+def InGameMenu():
+  print()
+  print("Options")
+  print()
+  print("1. Save Game")
+  print("2. Quit to Menu")
+  print("3. Return to Game")
+  print()
+  print("Please select an option: ", end='')
 
+
+def InGameMakeSelection():
+  InGameMenu()
+  OptionChoice = input()
+  if OptionChoice == '1':
+    pass
+  elif OptionChoice == '2':
+    Choice = get_menu_selection()
+    make_selection(Choice)
+  elif OptionChoice == '3':
+    pass
+    
+
+    
+    
   
 def CreateBoard():
   Board = []
@@ -221,21 +247,34 @@ def GetMove(StartSquare, FinishSquare):
   valid = False
   while not valid:
     try:
-      StartSquare = int(input("Enter coordinates of square containing piece to move (file first): "))
-      if len(str(StartSquare)) == 2:
-        valid = True
+      while StartSquare != -1:
+        StartSquare = int(input("Enter coordinates of square containing piece to move (file first) or type '-1' for menu: "))
+        if len(str(StartSquare)) == 2:
+          if StartSquare != -1:
+            valid = True
+          else:
+            InGameMakeSelection()
+        else:
+           print('Please provide both FILE and RANK for this move')
+           valid = False
     except:
       ValueError
-      print("That is not a valid input, please enter a two digit coordinate (e.g. '11')")
+      print("Please provide both FILE and RANK for this move")
+
+
+      
   valid = False
   while not valid:
     try:
       FinishSquare = int(input("Enter coordinates of square to move piece to (file first): "))
       if len(str(FinishSquare)) == 2:
         valid = True
+      else:
+        print('Please provide both FILE and RANK for this move')
+        valid = False
     except:
       ValueError
-      print("That is not a valid input, please enter a two digit coordinate (e.g. '11')")
+      print("Please provide both FILE and RANK for this move")
   return StartSquare, FinishSquare
  
 def MakeMove(Board, StartRank, StartFile, FinishRank, FinishFile, WhoseTurn):
@@ -344,7 +383,6 @@ def play_game(SampleGame):
       PlayAgain = chr(ord(PlayAgain) - 32)
  
 if __name__== "__main__":
-  display_menu()
   Choice = get_menu_selection()
   make_selection(Choice)
   
