@@ -26,6 +26,12 @@ def make_selection(Choice):
     pass
   elif Choice == '3':
     play_game('y')
+  elif Choice == '4':
+    pass
+  elif Choice == '5':
+    pass
+  elif Choice == '6':
+    print("Program Quitted")
   
     
 
@@ -40,9 +46,12 @@ def InGameMenu():
   print("Please select an option: ", end='')
 
 
-def InGameMakeSelection():
+def GetInGameSelection():
   InGameMenu()
   OptionChoice = input()
+  return OptionChoice
+
+def InGameMakeSelection(OptionChoice):
   if OptionChoice == '1':
     pass
   elif OptionChoice == '2':
@@ -253,13 +262,15 @@ def GetMove(StartSquare, FinishSquare):
           if StartSquare != -1:
             valid = True
           else:
-            InGameMakeSelection()
+            OptionChoice = GetInGameSelection()
+            InGameMakeSelection(OptionChoice)
         else:
            print('Please provide both FILE and RANK for this move')
            valid = False
     except:
       ValueError
       print("Please provide both FILE and RANK for this move")
+
 
 
       
@@ -385,4 +396,7 @@ def play_game(SampleGame):
 if __name__== "__main__":
   Choice = get_menu_selection()
   make_selection(Choice)
+
+     
+
   
