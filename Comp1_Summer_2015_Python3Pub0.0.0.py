@@ -1,4 +1,5 @@
 
+
  
 BOARDDIMENSION = 8
 def display_menu():
@@ -256,7 +257,6 @@ def GetMove(StartSquare, FinishSquare):
   valid = False
   while not valid:
     try:
-      while StartSquare != -1:
         StartSquare = int(input("Enter coordinates of square containing piece to move (file first) or type '-1' for menu: "))
         if len(str(StartSquare)) == 2:
           if StartSquare != -1:
@@ -277,9 +277,13 @@ def GetMove(StartSquare, FinishSquare):
   valid = False
   while not valid:
     try:
-      FinishSquare = int(input("Enter coordinates of square to move piece to (file first): "))
+      FinishSquare = int(input("Enter coordinates of square to move piece to (file first) or type '-1' for menu: "))
       if len(str(FinishSquare)) == 2:
-        valid = True
+          if FinishSquare != -1:
+            valid = True
+          else:
+            OptionChoice = GetInGameSelection()
+            InGameMakeSelection(OptionChoice)
       else:
         print('Please provide both FILE and RANK for this move')
         valid = False
