@@ -32,6 +32,7 @@ def make_selection(Choice):
   elif Choice == '5':
     pass
   elif Choice == '6':
+    print()
     print("Program Quitted")
   
     
@@ -43,6 +44,7 @@ def InGameMenu():
   print("1. Save Game")
   print("2. Quit to Menu")
   print("3. Return to Game")
+  print("4. Surrender")
   print()
   print("Please select an option: ", end='')
 
@@ -60,6 +62,10 @@ def InGameMakeSelection(OptionChoice):
     make_selection(Choice)
   elif OptionChoice == '3':
     pass
+  elif OptionChoice == '4':
+    print()
+    print("Surrendering...")
+    print()
     
 
     
@@ -214,22 +220,9 @@ def CheckMoveIsLegal(Board, StartRank, StartFile, FinishRank, FinishFile, WhoseT
       elif PieceType == "E":
         MoveIsLegal = CheckEtluMoveIsLegal(Board, StartRank, StartFile, FinishRank, FinishFile)
   return MoveIsLegal
- 
-def InitialiseBoard(Board, SampleGame):
-  if SampleGame == "Y":
-    for RankNo in range(1, BOARDDIMENSION + 1):
-      for FileNo in range(1, BOARDDIMENSION + 1):
-        Board[RankNo][FileNo] = "  "
-    Board[1][2] = "BG"
-    Board[1][4] = "BS"
-    Board[1][8] = "WG"
-    Board[2][1] = "WR"
-    Board[3][1] = "WS"
-    Board[3][2] = "BE"
-    Board[3][8] = "BE"
-    Board[6][8] = "BR"
-  else:
-    for RankNo in range(1, BOARDDIMENSION + 1):
+
+def Initialise_new_board(Board):
+  for RankNo in range(1, BOARDDIMENSION + 1):
       for FileNo in range(1, BOARDDIMENSION + 1):
         if RankNo == 2:
           Board[RankNo][FileNo] = "BR"
@@ -251,7 +244,29 @@ def InitialiseBoard(Board, SampleGame):
           elif FileNo == 5:
             Board[RankNo][FileNo] = Board[RankNo][FileNo] + "S"
         else:
-          Board[RankNo][FileNo] = "  "   
+          Board[RankNo][FileNo] = "  "
+
+def Initialsie_sample_board(Board, SampleGame):
+  if SampleGame == "Y":
+    InitialiseBoard(Board)
+  elif SampleGame == "n":
+    InitialiseBoard(Board)
+    
+    
+ 
+def InitialiseBoard(Board):
+    for RankNo in range(1, BOARDDIMENSION + 1):
+      for FileNo in range(1, BOARDDIMENSION + 1):
+        Board[RankNo][FileNo] = "  "
+    Board[1][2] = "BG"
+    Board[1][4] = "BS"
+    Board[1][8] = "WG"
+    Board[2][1] = "WR"
+    Board[3][1] = "WS"
+    Board[3][2] = "BE"
+    Board[3][8] = "BE"
+    Board[6][8] = "BR"
+  
                      
 def GetMove(StartSquare, FinishSquare):
   valid = False
@@ -367,7 +382,7 @@ def play_game(SampleGame):
       SampleGame = SampleGame.lower()[0]
     if ord(SampleGame) >= 97 and ord(SampleGame) <= 122:
       SampleGame = chr(ord(SampleGame) - 32)
-    InitialiseBoard(Board, SampleGame)
+      Initialsie_sample_board(Board, SampleGame)
     while not(GameOver):
       DisplayBoard(Board)
       DisplayWhoseTurnItIs(WhoseTurn)
