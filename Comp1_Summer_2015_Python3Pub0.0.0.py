@@ -1,3 +1,4 @@
+
 BOARDDIMENSION = 8
 def display_menu():
   print()
@@ -60,9 +61,11 @@ def InGameMakeSelection(OptionChoice):
   elif OptionChoice == '3':
     pass
   elif OptionChoice == '4':
-    print("HI")
     
-    
+    print()
+    print("Surrendering...")
+    print()
+
     
 
     
@@ -293,6 +296,8 @@ def Initialsie_sample_board(Board, SampleGame):
     InitialiseBoard(Board)
   elif SampleGame == "N":
     Initialise_new_board(Board)
+  elif SampleGame == "n":
+    InitialiseBoard(Board)
     
     
  
